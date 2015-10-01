@@ -16,7 +16,7 @@ public class QuoteExtension extends DashClockExtension {
    private static final String TAG = "QuoteExtension";
    boolean isInternetConnection = false ;
    ConnectionDetector cd;
-   MyTask myTask;
+   QuoteTask quoteTask;
    String quote;
 
 
@@ -38,10 +38,10 @@ public class QuoteExtension extends DashClockExtension {
         cd = new ConnectionDetector(getApplicationContext());
         isInternetConnection = cd.ConnectingInternet();
         if (isInternetConnection){
-        myTask = new MyTask();
-        myTask.execute();
+        quoteTask = new QuoteTask();
+        quoteTask.execute();
         try {
-            quote = myTask.get();
+            quote = quoteTask.get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
