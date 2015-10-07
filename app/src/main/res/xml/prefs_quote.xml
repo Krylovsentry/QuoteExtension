@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+ <PreferenceCategory android:title="@string/quote_settings">
+     <ListPreference android:title="@string/language_preference_title"
+         android:key="pref_list"
+
+         android:summary="@string/language_preference_desc">
+
+     </ListPreference>
+ </PreferenceCategory>
+
+
+
+</PreferenceScreen>

@@ -1,6 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Quote Extension for DashClock</string>
-    <string name="extension_title">Quote</string>
-    <string name="extension_description">Отображает случайно подобранную для вас цитату</string>
-    <string name="title_settings">Quote Extension Settings</string>
 </resources>
