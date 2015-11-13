@@ -1,4 +1,4 @@
 # QuoteExtension
-Quote extension for dashclock.
+Quote extension for dashclock by Roman Nurik
 
-You can download this application https://play.google.com/store/apps/details?id=ru.krylovanton.quoteextension
+
