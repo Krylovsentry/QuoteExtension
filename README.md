@@ -1,4 +1,4 @@
 # QuoteExtension
-Quote extension for dashclock by Roman Nurik
+Quote extension for dashclock.
 
 
