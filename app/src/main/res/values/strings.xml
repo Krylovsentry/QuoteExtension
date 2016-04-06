@@ -1,4 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Quote Extension for DashClock</string>
+    <string name="desktop_title">Quote</string>
+    <string name="extension_description">Shows a random quote for you</string>
+    <string name="extension_title">Quote</string>
+    <string name="language_preference_desc">Choose language</string>
+    <string name="language_preference_title">Language</string>
+    <string name="locale_quote">en</string>
+    <string name="qoute_out_connection">The man who makes no mistakes does not usually make anything</string>
+    <string name="quote_settings">Quote Settings</string>
+    <string name="title_out_connection">Edward John Phelps</string>
+    <string name="title_settings">Quote Extension Settings</string>
 </resources>

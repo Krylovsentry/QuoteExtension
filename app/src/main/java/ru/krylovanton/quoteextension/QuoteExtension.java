@@ -13,6 +13,11 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -25,7 +30,8 @@ public class QuoteExtension extends DashClockExtension {
     boolean isInternetConnection = false ;
     ConnectionDetector cd;
     QuoteTask quoteTask;
-    String quote;
+    List<String> quote;
+    List<Quote> quoteList = new ArrayList<Quote>();
 
 
 
@@ -44,7 +50,6 @@ public class QuoteExtension extends DashClockExtension {
     protected void onUpdateData(int reason) {
 
 
-
         cd = new ConnectionDetector(getApplicationContext());
         isInternetConnection = cd.ConnectingInternet();
         if (isInternetConnection){
@@ -59,26 +64,52 @@ public class QuoteExtension extends DashClockExtension {
                   e.printStackTrace();
               }
 
+            publishUpdate(new ExtensionData()
+                    .visible(true)
+                    .icon(R.drawable.ic_extension)
+                    .expandedTitle(quote.get(1))
+                    .expandedBody(quote.get(0)));
+            if (quoteList.size() >= 13) {
+                quoteList.clear();
+            }
+            quoteList.add(new Quote(quote.get(1),quote.get(0)));
         }
         // Publish the extension data update.
-        publishUpdate(new ExtensionData()
-                .visible(true)
-                .icon(R.drawable.ic_extension)
-                .expandedTitle("Quote")
-                .expandedBody(quote));
+
+        else {
+
+            if (quoteList.size() > 1) {
+
+                Random random = new Random();
+                int count  = random.nextInt(quoteList.size()-1);
+                publishUpdate(new ExtensionData()
+                        .visible(true)
+                        .icon(R.drawable.ic_extension)
+                        .expandedTitle(quoteList.get(count).getAuthor())
+                        .expandedBody(quoteList.get(count).getQuote()));
 
 
+            } else {
 
+
+                publishUpdate(new ExtensionData()
+                        .visible(true)
+                        .icon(R.drawable.ic_extension)
+                        .expandedTitle(getString(R.string.title_out_connection))
+                        .expandedBody(getString(R.string.qoute_out_connection)));
+
+            }
+        }
     }
 
 
 
-    class QuoteTask extends AsyncTask<Void, Void, String> {
+    class QuoteTask extends AsyncTask<Void, Void, List<String>> {
 
 
         @Override
-        protected String doInBackground(Void... params) {
-            String exitString = null;
+        protected List<String> doInBackground(Void... params) {
+            List<String> exitList = null;
 
             try {
                 String url = "http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang="+getString(R.string.locale_quote);
@@ -90,20 +121,39 @@ public class QuoteExtension extends DashClockExtension {
                 StringBuffer response = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) {
                     response.append(inputLine);
-                    exitString = response.toString();
+
                 }
+                exitList = new LinkedList<String>(Arrays.asList(response.toString().split("\\(")));
+
+                if (exitList.size()==1){
+
+                    exitList.add("Quote");
+
+                } else {
+
+                    exitList.set(1,exitList.get(1).replaceAll("\\)",""));
+
+                }
+
+
+
+
                 in.close();
 
             } catch (Exception e){
-                exitString = "The man who makes no mistakes does not usually make anything";
+                exitList = new LinkedList<String>();
+                exitList.set(0,"Edward John Phelps");
+                exitList.set(1,"The man who makes no mistakes does not usually make anything");
+
                 e.printStackTrace();
+
 
             }
 
 
 
 
-            return exitString;
+            return exitList;
         }
 
         @Override
@@ -112,7 +162,7 @@ public class QuoteExtension extends DashClockExtension {
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected void onPostExecute(List<String> s) {
             super.onPostExecute(s);
         }
     }

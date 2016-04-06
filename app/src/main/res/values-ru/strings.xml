@@ -9,4 +9,6 @@
     <string name="extension_description">Показывает случайно подобранную для вас цитату</string>
     <string name="desktop_title">Quote</string>
     <string name="app_name">Quote Extension for DashClock</string>
+    <string name="qoute_out_connection">Человек, который не делает ошибок, обычно вообще ничего не делает.</string>
+    <string name="title_out_connection">Эдвард Фелпс</string>
 </resources>

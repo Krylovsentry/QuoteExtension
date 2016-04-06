@@ -9,4 +9,6 @@
     <string name="extension_description">Shows a random quote for you</string>
     <string name="desktop_title">Quote</string>
     <string name="app_name">Quote Extension for DashClock</string>
+    <string name="qoute_out_connection">The man who makes no mistakes does not usually make anything</string>
+    <string name="title_out_connection">Edward John Phelps</string>
 </resources>
