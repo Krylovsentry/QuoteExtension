@@ -5,7 +5,9 @@
  <PreferenceCategory android:title="@string/quote_settings">
      <ListPreference android:title="@string/language_preference_title"
          android:key="pref_list"
-         android:summary="@string/language_preference_desc">
+         android:summary="@string/language_preference_desc"
+         android:entries="@array/entries"
+         android:entryValues="@array/entry_values">
 
      </ListPreference>
  </PreferenceCategory>

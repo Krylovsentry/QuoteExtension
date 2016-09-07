@@ -1,10 +1,12 @@
 package ru.krylovanton.quoteextension;
 
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.preference.PreferenceManager;
+import android.util.Log;
+
 
 import com.google.android.apps.dashclock.api.DashClockExtension;
 import com.google.android.apps.dashclock.api.ExtensionData;
@@ -24,10 +26,12 @@ import java.util.concurrent.ExecutionException;
  * Created by Антон on 05.09.2015.
  */
 public class QuoteExtension extends DashClockExtension {
+
     private static final String TAG = "QuoteExtension";
 
     public static final String PREF_LANGUAGE = "pref_language";
     boolean isInternetConnection = false ;
+    SharedPreferences appPreferences ;
     ConnectionDetector cd;
     QuoteTask quoteTask;
     List<String> quote;
@@ -39,9 +43,7 @@ public class QuoteExtension extends DashClockExtension {
     protected void onInitialize(boolean isReconnect) {
         super.onInitialize(isReconnect);
         setUpdateWhenScreenOn(true);
-
-
-
+        appPreferences = PreferenceManager.getDefaultSharedPreferences(this);
 
     }
 
@@ -112,7 +114,9 @@ public class QuoteExtension extends DashClockExtension {
             List<String> exitList = null;
 
             try {
-                String url = "http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang="+getString(R.string.locale_quote);
+                String language = appPreferences.getString("pref_list",getString(R.string.locale_quote));
+                Log.v(TAG,language);
+                String url = "http://api.forismatic.com/api/1.0/?method=getQuote&format=text&lang="+language;
                 URL obj = new URL(url);
                 HttpURLConnection con = (HttpURLConnection) obj.openConnection();
                 con.setRequestMethod("GET");

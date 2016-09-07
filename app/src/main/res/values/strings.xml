@@ -11,4 +11,13 @@
     <string name="quote_settings">Quote Settings</string>
     <string name="title_out_connection">Edward John Phelps</string>
     <string name="title_settings">Quote Extension Settings</string>
+    <string name="hello">Hello World, MainActivity!</string>
+    <string-array name="entries">
+        <item>Русский</item>
+        <item>English</item>
+    </string-array>
+    <string-array name="entry_values">
+        <item>ru</item>
+        <item>en</item>
+    </string-array>
 </resources>
